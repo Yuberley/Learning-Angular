@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  router = {
+    title: 'Shopping List',
+    url: '/'
+
+  }
+
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,20 +1,9 @@
-<div>
-    <app-item *ngFor="let item of items" [item]="item"></app-item>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-      <p>
-        <ngb-alert [dismissible]="false">
-            <strong>Warning!</strong> Better check yourself, you're not looking too good.
-        </ngb-alert>
-    </p>
-    
-
-
-
+<div class="container">
+    <app-total message="Total por pagar: " [total]="total" ></app-total>
+    <app-item 
+        *ngFor="let item of items" 
+        [item]="item"
+        (deleteItem)="deleteItem($event)"
+        (toggleItem)="toggleItem($event)">
+    </app-item>
 </div>

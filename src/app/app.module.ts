@@ -7,18 +7,26 @@ import { HeaderComponent } from './components/header/header.component';
 import { ItemsComponent } from './components/items/items.component';
 import { ItemComponent } from './components/item/item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TotalComponent } from './components/total/total.component';
+import { AdditemComponent } from './components/additem/additem.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ItemsComponent,
-    ItemComponent
+    ItemComponent,
+    TotalComponent,
+    AdditemComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

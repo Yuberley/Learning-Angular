@@ -1,18 +1,18 @@
-<div>
-    <div>
-        <input type="checkbox" [checked]="item.isCompleted">
+<div class="row justify-content-center" [ngClass]="{'opacity-25 text-decoration-line-through': item.isCompleted}">
+    <div class="col-5 gy-3">
+        <input type="checkbox" [checked]="item.isCompleted" (change)="onToggle(item)" >
         {{ item.title }}
     </div>
-    <div>
-        {{ item.price }}
+    <div class="col-1">
+        {{ item.price | currency }}
     </div>
-    <div>
+    <div class="col-1">
         {{ item.quantity }}
     </div>
-    <div>
-        {{ ( item.price * item.quantity ) }}
+    <div class="col-2 text-success fw-bold">
+        {{ ( item.price * item.quantity ) | currency }}
     </div>
-    <div>
-        <button>Remove</button>
+    <div class="col-1">
+        <button class="btn btn-sm btn-danger" (click)="onDelete(item)" >Remove</button>
     </div>
 </div>

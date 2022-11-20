@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/item';
+import { ItemService } from '../../services/item.service';
 
 @Component({
   selector: 'app-items',
@@ -9,35 +10,33 @@ import { Item } from '../../models/item';
 export class ItemsComponent implements OnInit {
 
   items: Item[] = [];
+  total: number = 0;
 
-  constructor() { }
+  constructor(private itemService:ItemService) { }
 
   ngOnInit(): void {
+    // this.items = this.itemService.getItems();
+    this.itemService.getItems().subscribe(items => {
+      this.items = items;
+    });
+    this.getTotal();
+  }
 
-    this.items = [
-      {
-        id: 1,
-        title: 'Item One',
-        price: 29.99,
-        quantity: 1,
-        isCompleted: false
-      },
-      {
-        id: 2,
-        title: 'Item Two',
-        price: 39.99,
-        quantity: 1,
-        isCompleted: true
-      },
-      {
-        id: 3,
-        title: 'Item Three',
-        price: 49.99,
-        quantity: 1,
-        isCompleted: true
-      },
-    ];
+  deleteItem(item: Item){
+    this.items = this.items.filter(i => i.id !== item.id);
+    this.getTotal();
+  }
 
+  toggleItem(item: Item){
+    this.getTotal();
+  }
+
+  getTotal() {
+    this.total = this.items
+                .filter(item => !item.isCompleted)
+                .map(item => item.price * item.quantity)
+                .reduce((acc, item) => (acc += item), 0);
+    return this.total;
   }
 
 }
