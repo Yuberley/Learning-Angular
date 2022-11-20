@@ -8,41 +8,27 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ItemService {
 
-  url:string = 'http://localhost:3000/items';
-
-  items: Item[] = [      
-    {
-      id: 1,
-      title: 'Item One',
-      price: 29.99,
-      quantity: 1,
-      isCompleted: false
-    },
-    {
-      id: 2,
-      title: 'Item Two',
-      price: 39.99,
-      quantity: 1,
-      isCompleted: true
-    },
-    {
-      id: 3,
-      title: 'Item Three',
-      price: 49.99,
-      quantity: 1,
-      isCompleted: false
-    },
-  ];
+  url:string = 'http://localhost:3000/items/';
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http:HttpClient) { }
 
   getItems():Observable<Item[]> {
-    // return this.items;
     return this.http.get<Item[]>(this.url);
   }
 
-  addItem(item: Item) {
-    this.items.unshift(item);
+  addItem(item: Item):Observable<Item> {
+    return this.http.post<Item>(this.url, item, this.httpOptions);
+  }
+
+  toggleItem(item: Item):Observable<Item> {
+    return this.http.put<Item>(this.url + item.id, item, this.httpOptions);
+  }
+
+  deleteItem(item: Item):Observable<Item> {
+    return this.http.delete<Item>(this.url + item.id);
   }
 
 }

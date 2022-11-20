@@ -6,11 +6,9 @@ import { Item } from '../../models/item';
 @Component({
   selector: 'app-additem',
   templateUrl: './additem.component.html',
-  styleUrls: ['./additem.component.css']
 })
 export class AdditemComponent implements OnInit {
 
-  id: number = 0;
   title: string = '';
   price: number = 0;
   quantity: number = 0;
@@ -22,16 +20,14 @@ export class AdditemComponent implements OnInit {
 
   onSubmit() {
     const newItem = new Item();
-    newItem.id = this.id;
     newItem.title = this.title;
     newItem.price = this.price;
     newItem.quantity = this.quantity;
     newItem.isCompleted = false;
 
-    this.itemService.addItem(newItem);
-    this.router.navigate(['/']);
-    
-
+    this.itemService.addItem(newItem).subscribe(item => {
+      this.router.navigate(['/']);
+    });
   }
   
 }
