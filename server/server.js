@@ -24,7 +24,7 @@ app.put('/items/:id', async (req, res) => {
     const id = req.params.id;
     await open();
     const index = items.findIndex(item => item.id === id);
-    items[index].completed = !items[index].completed;
+    items[index].isCompleted = !items[index].isCompleted;
     await save();
     res.json(items[index]);
 });

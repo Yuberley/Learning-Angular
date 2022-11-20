@@ -20,7 +20,6 @@ export class ItemsComponent implements OnInit {
     });
   }
   
-
   deleteItem(item: Item){
     this.items = this.items.filter(i => i.id !== item.id);
     this.itemService.deleteItem(item).subscribe();
